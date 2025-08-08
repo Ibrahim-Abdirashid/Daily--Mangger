@@ -14,6 +14,7 @@
 
     <section class="joint container">
         <!-- * kii guud ee isku hayay saddexda section -->
+         
     <section class=" all-hold">
         <div class="hold-content">
             <!-- * kii guud ee isku hayay -->
@@ -21,11 +22,15 @@
                 <p class="first-p">To do</p>
                 <p class="number-0">0</p>
              </div>
-             <div class="button-section">
+             <div class="button-section" >
                 <p>➕</p>
-                <button id="add-btn">Add Task</button>
+                <button class="add-btn" data-section="todo">Add Task</button>
+
              </div>
-        </div>
+             </div>
+        
+         <div class="todo-item"></div>
+
     </section>
     <!-- * qeybta labaad ee in-progress-ka ah -->
      <section class=" all-hold second-hold">
@@ -35,11 +40,33 @@
                 <p class="first-p">In Progress</p>
                 <p class="number-0">0</p>
              </div>
-             <div class="button-section">
+             <div class="button-section" >
                 <p>➕</p>
-                <button id="add-btn">Add Task</button>
+                <button class="add-btn" data-section="inprogress">Add Task</button>
+
              </div>
-        </div>
+             </div>
+        
+      
+        <!-- <div class="todo-list">
+          
+          
+            <h2 class="text">Title</h2>
+            <p class="content">Description</p>
+          
+          
+            <h3 class="level">level</h3>
+            <p class="date">tomorow</p>
+         
+          
+            <button class="edit-btn">Edit</button>
+            <button class="delete-btn">Delete</button>
+         
+          
+        </div> -->
+
+
+        <div class="todo-item2"></div>
     </section>
 
     <!-- * qeybta saddexaad ee ah done-ka -->
@@ -52,10 +79,62 @@
              </div>
              <div class="button-section">
                 <p>➕</p>
-                <button id="add-btn">Add Task</button>
+                <button id="add-btn" class="add-btn">Add Task</button>
              </div>
         </div>
     </section>
     </section>
+
+    <!-- Modal wrapper (background and centering) -->
+  <div class="modal hidden">
+
+    <!-- Modal box that contains the form -->
+    <div class="modal-content">
+      <h2>Create New Task</h2>
+      <div class="close-model">❌</div>
+
+      <!-- Task creation form -->
+      <form id="input-form" class="input-form2">
+
+        <!-- Title input -->
+        <label>Task Title</label>
+        <input type="text" placeholder="Enter task title" id="input-text" class="input-text2"  />
+
+        <!-- Description text area -->
+        <label>Description</label>
+        <textarea placeholder="Enter task description (optional)" id="textArea" class="textArea2" ></textarea>
+
+        <!-- Due date input -->
+        <label>Due Date</label>
+        <input type="date" id="date" class="date2"/  >
+
+        <!-- Priority selection section -->
+        <label>Priority Level</label>
+       
+        <select id="priority" class="priority2" required>
+          <option value="Low">Low</option>
+          <option value="Medium">Medium</option>
+          <option value="High">High</option>
+        </select>
+
+        <!-- Task status dropdown -->
+        <label>Status</label>
+        <select  id="status" class="status2" required>
+          <option value="To Do">To Do</option>
+          <option value="In-Progress">In Progress</option>
+          <option value="Done">Done</option>
+        </select>
+
+        <!-- Submit and cancel buttons -->
+        <div class="actions">
+          <button type="submit" class="create-btn">Create Task</button>
+          <button type="button" class="cancel-btn">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="overlay hidden"></div>
+
+  <script src="app.js" defer></script>
 </body>
 </html>
