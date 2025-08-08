@@ -6,12 +6,13 @@ const closeModel = document.querySelector(".close-model");
 
 const todoItem = document.querySelector(".todo-item");
 const todoItem2 = document.querySelector(".todo-item2");
-let currentSection = ""; // todo or inprogress
+const todoItem3 = document.querySelector(".todo-item3")
+let currentSection = ""; // todo or inprogress or done
 
 // Open modal
 openModal.forEach(button => {
   button.addEventListener("click", function () {
-    currentSection = button.dataset.section; // get the section: todo or inprogress
+    currentSection = button.dataset.section; // get the section: todo or inprogress or done
     modal.classList.remove("hidden");
     overlay.classList.remove("hidden");
   });
@@ -30,6 +31,9 @@ window.onload = function () {
 
   const tasks2 = JSON.parse(localStorage.getItem("tasks2")) || [];
   tasks2.forEach(task2 => displayTaskInprogress(task2));
+
+  const tasks3 = JSON.parse(localStorage.getItem("tasks3")) || [];
+  tasks3.forEach(task3 =>displayTaskDone(task3))
 };
 
 // Submit form
@@ -72,6 +76,11 @@ inputForm.addEventListener("submit", function (e) {
     tasks2.push(task);
     localStorage.setItem("tasks2", JSON.stringify(tasks2));
     displayTaskInprogress(task);
+  }else if(currentSection === 'done'){
+    const tasks3 = JSON.parse(localStorage.getItem("tasks3")) || [];
+    tasks3.push(task);
+    localStorage.setItem("tasks3", JSON.stringify(tasks3))
+    displayTaskDone(task)
   }
 
   // Clear form and close modal
@@ -131,4 +140,29 @@ function displayTaskInprogress(task) {
     tasks2 = tasks2.filter(t => t.id !== task.id);
     localStorage.setItem("tasks2", JSON.stringify(tasks2));
   });
+}
+
+//* halkan waxaa ka bilaabmaya shaqada sectionka (done) 
+function displayTaskDone(task){
+    const div = document.createElement("div")
+    div.className = "todo-list3";
+
+    div.innerHTML = `
+     <h2 class="text">${task.title}</h2>
+    <p class="content">${task.description}</p>
+    <h3 class="level">${task.dueDate}</h3>
+    <p class="date">${task.priority}</p>
+    <p class="date">${task.status}</p>
+    <button class="edit-btn">Edit</button>
+    <button class="delete-btn">Delete</button>
+    `
+    todoItem3.appendChild(div);
+    //* Delete function
+    const deleteBtn3 = div.querySelector(".delete-btn");
+    deleteBtn3.addEventListener("click", function(){
+        div.remove()
+        let tasks3 = JSON.parse(localStorage.getItem("tasks3")) ||[];
+        tasks3 = tasks3.filter(t => t.id !== task.id);
+        localStorage.setItem("tasks3", JSON.stringify(tasks3))
+    }) 
 }
