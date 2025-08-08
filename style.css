@@ -121,8 +121,9 @@ header p{
   padding: .6rem;
   gap: 1rem;
   margin-inline: auto;
-  margin-top: 1rem;
+  margin-block: 1rem;
   border-radius: 1rem;
+  
 }
 .todo-list2{
   max-width: 300px;
@@ -134,7 +135,7 @@ header p{
   padding: .6rem;
   gap: 1rem;
   margin-inline: auto;
-  margin-top: 1rem;
+  margin-block: 1rem;
   border-radius: 1rem;
 }
 .todo-list3{
@@ -146,7 +147,7 @@ header p{
   padding: .6rem;
   gap: 1rem;
   margin-inline: auto;
-  margin-top: 1rem;
+  margin-block: 1rem;
   border-radius: 1rem;
 }
 /* .todo-item{
