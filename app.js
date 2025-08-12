@@ -71,6 +71,7 @@ inputForm.addEventListener("submit", function (e) {
     tasks.push(task);
     localStorage.setItem("tasks", JSON.stringify(tasks));
     displayTask(task);
+    
   } else if (currentSection === "inprogress") {
     const tasks2 = JSON.parse(localStorage.getItem("tasks2")) || [];
     tasks2.push(task);
@@ -113,7 +114,69 @@ function displayTask(task) {
     tasks = tasks.filter(t => t.id !== task.id);
     localStorage.setItem("tasks", JSON.stringify(tasks));
   });
+
+  //* Edit btn
+  
+  const editBtn = div.querySelector(".edit-btn");
+  editBtn.addEventListener("click", function(){
+    openEditModal(task);
+  })
 }
+
+//* openEditModal ayaan hlakan ku sameysan
+function openEditModal(task){
+  modal.classList.toggle("hidden");
+  overlay.classList.toggle("hidden");
+
+  //* fill the form fields with task data
+  document.querySelector("#input-text").value = task.title;
+  document.querySelector("#textArea").value = task.description;
+  document.querySelector("#date").value = task.dueDate;
+  document.querySelector("#priority").value = task.priority;
+  document.querySelector("#status").value = task.status;
+ 
+  // handle the save button to update the task
+  const saveBtn = document.querySelector(".create-btn");
+  saveBtn.textContent = "Save Changes";
+
+  // event listener for save  changes button
+  saveBtn.removeEventListener("click", updateTask)//remove previous handle
+  saveBtn.addEventListener("click", function(){
+    updateTask(task);
+  })
+
+
+} 
+//todo function updateTask ayaan halka ku sameyn
+function updateTask(task){
+  const title = document.querySelector("#input-text").value;
+  const description = document.querySelector("#textArea").value;
+  const dueDate = document.querySelector("#date").value;
+  const priority = document.querySelector("#priority").value;
+  const status = document.querySelector("#status").value;
+
+  const updateTask = {
+    id: task.id,
+    title: title,
+    description: description,
+    dueDate: dueDate,
+    priority: priority,
+    status: status,
+  }
+
+  //* save updated task to localstorage
+  let tasks = JSON.parse(localStorage.getItem("tasks")) || []; 
+  tasks =tasks.map(t => t.id === task.id ? updateTask : t);
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+
+   document.querySelector(".todo-item").innerHTML = ''; // Clear the task list
+  tasks.forEach(task => displayTask(task)); // Re-render tasks
+  // Close modal
+  modal.classList.add("hidden");
+  overlay.classList.add("hidden");
+} 
+
+//* ///////////////////////////////////////////////////////////
 
 // Display In Progress
 function displayTaskInprogress(task) {
@@ -165,4 +228,10 @@ function displayTaskDone(task){
         tasks3 = tasks3.filter(t => t.id !== task.id);
         localStorage.setItem("tasks3", JSON.stringify(tasks3))
     }) 
+
+    //* Edit btn
+    const editBtn3 = div.querySelector(".edit-btn") ;
+    editBtn3.addEventListener("click", function(){
+
+    })
 }
