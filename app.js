@@ -151,33 +151,33 @@ function openEditModal(task){
 
 } 
 //todo function updateTask ayaan halka ku sameyn
-// function updateTask(task){
-//   const title = document.querySelector("#input-text").value;
-//   const description = document.querySelector("#textArea").value;
-//   const dueDate = document.querySelector("#date").value;
-//   const priority = document.querySelector("#priority").value;
-//   const status = document.querySelector("#status").value;
+function updateTask(task){
+  const title = document.querySelector("#input-text").value;
+  const description = document.querySelector("#textArea").value;
+  const dueDate = document.querySelector("#date").value;
+  const priority = document.querySelector("#priority").value;
+  const status = document.querySelector("#status").value;
 
-//   const updateTask = {
-//     id: task.id,
-//     title: title,
-//     description: description,
-//     dueDate: dueDate,
-//     priority: priority,
-//     status: status,
-//   }
+  const updateTask = {
+    id: task.id,
+    title: title,
+    description: description,
+    dueDate: dueDate,
+    priority: priority,
+    status: status,
+  }
 
-//   //* save updated task to localstorage
-//   let tasks = JSON.parse(localStorage.getItem("tasks")) || []; 
-//   tasks =tasks.map(t => t.id === task.id ? updateTask : t);
-//   localStorage.setItem("tasks", JSON.stringify(tasks));
+  //* save updated task to localstorage
+  let tasks = JSON.parse(localStorage.getItem("tasks")) || []; 
+  tasks =tasks.map(t => t.id === task.id ? updateTask : t);
+  localStorage.setItem("tasks", JSON.stringify(tasks));
 
-//    document.querySelector(".todo-item").innerHTML = ''; // Clear the task list
-//   tasks.forEach(task => displayTask(task)); // Re-render tasks
-//   // Close modal
-//   modal.classList.add("hidden");
-//   overlay.classList.add("hidden");
-// } 
+   document.querySelector(".todo-item").innerHTML = ''; // Clear the task list
+  tasks.forEach(task => displayTask(task)); // Re-render tasks
+  // Close modal
+  modal.classList.add("hidden");
+  overlay.classList.add("hidden");
+} 
 
 //* ///////////////////////////////////////////////////////////
 //todo ///////////////////////////////////////////////////////
@@ -214,33 +214,33 @@ function displayTaskInprogress(task) {
 }
 
 //* halkana waxaa ka bilaabmaya updateTask weliba qeybta progress-ka 
-// function updateTask(task){
-//   const title = document.querySelector("#input-text").value;
-//   const description = document.querySelector("#textArea").value;
-//   const dueDate = document.querySelector("#date").value;
-//   const priority = document.querySelector("#priority").value;
-//   const status = document.querySelector("#status").value;
+function updateTask(task){
+  const title = document.querySelector("#input-text").value;
+  const description = document.querySelector("#textArea").value;
+  const dueDate = document.querySelector("#date").value;
+  const priority = document.querySelector("#priority").value;
+  const status = document.querySelector("#status").value;
 
-//   const updateTask = {
-//     id: task.id,
-//     title: title,
-//     description: description,
-//     dueDate: dueDate,
-//     priority: priority,
-//     status: status,
-//   }
+  const updateTask = {
+    id: task.id,
+    title: title,
+    description: description,
+    dueDate: dueDate,
+    priority: priority,
+    status: status,
+  }
 
-//   //* save updated task to localstorage
-//   let tasks2 = JSON.parse(localStorage.getItem("tasks2")) || []; 
-//   tasks2 =tasks2.map(t => t.id === task.id ? updateTask : t);
-//   localStorage.setItem("tasks2", JSON.stringify(tasks2));
+  //* save updated task to localstorage
+  let tasks2 = JSON.parse(localStorage.getItem("tasks2")) || []; 
+  tasks2 =tasks2.map(t => t.id === task.id ? updateTask : t);
+  localStorage.setItem("tasks2", JSON.stringify(tasks2));
 
-//    document.querySelector(".todo-item2").innerHTML = ''; // Clear the task list
-//   tasks2.forEach(task => displayTaskInprogress(task)); // Re-render tasks
-//   // Close modal
-//   modal.classList.add("hidden");
-//   overlay.classList.add("hidden");
-// } 
+   document.querySelector(".todo-item2").innerHTML = ''; // Clear the task list
+  tasks2.forEach(task => displayTaskInprogress(task)); // Re-render tasks
+  // Close modal
+  modal.classList.add("hidden");
+  overlay.classList.add("hidden");
+} 
 //*/*/*/*/*////////////////////////////////////////////
 //todo halkan waxaa ka bilaabmaya shaqada sectionka (done) 
 function displayTaskDone(task){
