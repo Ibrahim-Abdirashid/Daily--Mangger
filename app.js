@@ -65,6 +65,8 @@ inputForm.addEventListener("submit", function (e) {
     priority: priority.value,
     status: status.value,
   };
+ 
+
 
   if (currentSection === "todo") {
     const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
@@ -83,6 +85,7 @@ inputForm.addEventListener("submit", function (e) {
     localStorage.setItem("tasks3", JSON.stringify(tasks3))
     displayTaskDone(task)
   }
+
 
   // Clear form and close modal
   title.value = "";
@@ -148,33 +151,33 @@ function openEditModal(task){
 
 } 
 //todo function updateTask ayaan halka ku sameyn
-function updateTask(task){
-  const title = document.querySelector("#input-text").value;
-  const description = document.querySelector("#textArea").value;
-  const dueDate = document.querySelector("#date").value;
-  const priority = document.querySelector("#priority").value;
-  const status = document.querySelector("#status").value;
+// function updateTask(task){
+//   const title = document.querySelector("#input-text").value;
+//   const description = document.querySelector("#textArea").value;
+//   const dueDate = document.querySelector("#date").value;
+//   const priority = document.querySelector("#priority").value;
+//   const status = document.querySelector("#status").value;
 
-  const updateTask = {
-    id: task.id,
-    title: title,
-    description: description,
-    dueDate: dueDate,
-    priority: priority,
-    status: status,
-  }
+//   const updateTask = {
+//     id: task.id,
+//     title: title,
+//     description: description,
+//     dueDate: dueDate,
+//     priority: priority,
+//     status: status,
+//   }
 
-  //* save updated task to localstorage
-  let tasks = JSON.parse(localStorage.getItem("tasks")) || []; 
-  tasks =tasks.map(t => t.id === task.id ? updateTask : t);
-  localStorage.setItem("tasks", JSON.stringify(tasks));
+//   //* save updated task to localstorage
+//   let tasks = JSON.parse(localStorage.getItem("tasks")) || []; 
+//   tasks =tasks.map(t => t.id === task.id ? updateTask : t);
+//   localStorage.setItem("tasks", JSON.stringify(tasks));
 
-   document.querySelector(".todo-item").innerHTML = ''; // Clear the task list
-  tasks.forEach(task => displayTask(task)); // Re-render tasks
-  // Close modal
-  modal.classList.add("hidden");
-  overlay.classList.add("hidden");
-} 
+//    document.querySelector(".todo-item").innerHTML = ''; // Clear the task list
+//   tasks.forEach(task => displayTask(task)); // Re-render tasks
+//   // Close modal
+//   modal.classList.add("hidden");
+//   overlay.classList.add("hidden");
+// } 
 
 //* ///////////////////////////////////////////////////////////
 //todo ///////////////////////////////////////////////////////
@@ -210,33 +213,34 @@ function displayTaskInprogress(task) {
   })
 }
 
-function updateTask(task){
-  const title = document.querySelector("#input-text").value;
-  const description = document.querySelector("#textArea").value;
-  const dueDate = document.querySelector("#date").value;
-  const priority = document.querySelector("#priority").value;
-  const status = document.querySelector("#status").value;
+//* halkana waxaa ka bilaabmaya updateTask weliba qeybta progress-ka 
+// function updateTask(task){
+//   const title = document.querySelector("#input-text").value;
+//   const description = document.querySelector("#textArea").value;
+//   const dueDate = document.querySelector("#date").value;
+//   const priority = document.querySelector("#priority").value;
+//   const status = document.querySelector("#status").value;
 
-  const updateTask = {
-    id: task.id,
-    title: title,
-    description: description,
-    dueDate: dueDate,
-    priority: priority,
-    status: status,
-  }
+//   const updateTask = {
+//     id: task.id,
+//     title: title,
+//     description: description,
+//     dueDate: dueDate,
+//     priority: priority,
+//     status: status,
+//   }
 
-  //* save updated task to localstorage
-  let tasks2 = JSON.parse(localStorage.getItem("tasks2")) || []; 
-  tasks2 =tasks2.map(t => t.id === task.id ? updateTask : t);
-  localStorage.setItem("tasks2", JSON.stringify(tasks2));
+//   //* save updated task to localstorage
+//   let tasks2 = JSON.parse(localStorage.getItem("tasks2")) || []; 
+//   tasks2 =tasks2.map(t => t.id === task.id ? updateTask : t);
+//   localStorage.setItem("tasks2", JSON.stringify(tasks2));
 
-   document.querySelector(".todo-item2").innerHTML = ''; // Clear the task list
-  tasks2.forEach(task => displayTaskInprogress(task)); // Re-render tasks
-  // Close modal
-  modal.classList.add("hidden");
-  overlay.classList.add("hidden");
-} 
+//    document.querySelector(".todo-item2").innerHTML = ''; // Clear the task list
+//   tasks2.forEach(task => displayTaskInprogress(task)); // Re-render tasks
+//   // Close modal
+//   modal.classList.add("hidden");
+//   overlay.classList.add("hidden");
+// } 
 //*/*/*/*/*////////////////////////////////////////////
 //todo halkan waxaa ka bilaabmaya shaqada sectionka (done) 
 function displayTaskDone(task){
@@ -263,8 +267,52 @@ function displayTaskDone(task){
     }) 
 
     //* Edit btn
-    const editBtn3 = div.querySelector(".edit-btn") ;
-    editBtn3.addEventListener("click", function(){
-
+    const editBtn = div.querySelector(".edit-btn") ;
+    editBtn.addEventListener("click", function(){
+      openEditModal(task)
     })
+    
 }
+
+function updateTask(task){
+  const title = document.querySelector("#input-text").value;
+  const description = document.querySelector("#textArea").value;
+  const dueDate = document.querySelector("#date").value;
+  const priority = document.querySelector("#priority").value;
+  const status = document.querySelector("#status").value;
+
+  const updateTask = {
+    id: task.id,
+    title: title,
+    description: description,
+    dueDate: dueDate,
+    priority: priority,
+    status: status,
+  }
+
+  //* save updated task to localstorage
+    // Update task based on status (to-do, in-progress, done)
+  if (updateTask.status === "To Do") {
+    let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+    tasks = tasks.map(t => t.id === task.id ? updateTask : t); // Replace the task
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+    document.querySelector(".todo-item").innerHTML = ''; // Clear the task list
+    tasks.forEach(task => displayTask(task)); // Re-render tasks
+  } else if (updateTask.status === "In-Progress") {
+    let tasks2 = JSON.parse(localStorage.getItem("tasks2")) || [];
+    tasks2 = tasks2.map(t => t.id === task.id ? updateTask : t); // Replace the task
+    localStorage.setItem("tasks2", JSON.stringify(tasks2));
+    document.querySelector(".todo-item2").innerHTML = ''; // Clear the task list
+    tasks2.forEach(task => displayTaskInprogress(task)); // Re-render tasks
+  } else if (updateTask.status === "Done") {
+    let tasks3 = JSON.parse(localStorage.getItem("tasks3")) || [];
+    tasks3 = tasks3.map(t => t.id === task.id ? updateTask : t); // Replace the task
+    localStorage.setItem("tasks3", JSON.stringify(tasks3));
+    document.querySelector(".todo-item3").innerHTML = ''; // Clear the task list
+    tasks3.forEach(task => displayTaskDone(task)); // Re-render tasks
+  }
+
+  // Close modal
+  modal.classList.add("hidden");
+  overlay.classList.add("hidden");
+} 
